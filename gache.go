@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/gob"
 	"io"
+	"iter"
 	"runtime"
 	"sync"
 	"sync/atomic"
@@ -323,6 +324,23 @@ func (g *gache[V]) Range(ctx context.Context, f func(string, V, int64) bool) Gac
 	}
 	wg.Wait()
 	return g
+}
+
+// RangeIter returns iterator for Gache
+func (g *gache[V]) RangeIter() iter.Seq2[string, V] {
+	return func(yield func(string, V) bool) {
+		for _, s := range g.shards {
+			for k, v := range s.RangeIter() {
+				if v.isValid() {
+					if !yield(k, v.val) {
+						return
+					}
+				} else {
+					g.expiration(k)
+				}
+			}
+		}
+	}
 }
 
 // Len returns stored object length

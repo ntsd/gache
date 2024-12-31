@@ -30,6 +30,7 @@
 package gache
 
 import (
+	"iter"
 	"sync"
 	"sync/atomic"
 	"unsafe"
@@ -363,6 +364,34 @@ func (m *Map[K, V]) Range(f func(key K, value V) bool) {
 		}
 		if !f(k, v) {
 			break
+		}
+	}
+}
+
+func (m *Map[K, V]) RangeIter() iter.Seq2[K, V] {
+	return func(yield func(K, V) bool) {
+		read := m.loadReadOnly()
+		if read.amended {
+			m.mu.Lock()
+			read = m.loadReadOnly()
+			if read.amended {
+				read = readOnly[K, V]{m: m.dirty}
+				copyRead := read
+				m.read.Store(&copyRead)
+				m.dirty = nil
+				m.misses = 0
+			}
+			m.mu.Unlock()
+		}
+
+		for k, e := range read.m {
+			v, ok := e.load()
+			if !ok {
+				continue
+			}
+			if !yield(k, v) {
+				break
+			}
 		}
 	}
 }
