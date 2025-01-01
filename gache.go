@@ -24,6 +24,8 @@ type (
 		DisableExpiredHook() Gache[V]
 		EnableExpiredHook() Gache[V]
 		Range(context.Context, func(string, V, int64) bool) Gache[V]
+		RangeIter() iter.Seq2[string, V]
+		RangeIterValue() iter.Seq[V]
 		Get(string) (V, bool)
 		GetWithExpire(string) (V, int64, bool)
 		Read(io.Reader) error
@@ -337,6 +339,21 @@ func (g *gache[V]) RangeIter() iter.Seq2[string, V] {
 					}
 				} else {
 					g.expiration(k)
+				}
+			}
+		}
+	}
+}
+
+// RangeIterValue returns iterator value for Gache
+func (g *gache[V]) RangeIterValue() iter.Seq[V] {
+	return func(yield func(V) bool) {
+		for _, s := range g.shards {
+			for v := range s.RangeIterValue() {
+				if v.isValid() {
+					if !yield(v.val) {
+						return
+					}
 				}
 			}
 		}

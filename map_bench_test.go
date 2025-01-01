@@ -35,7 +35,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/ntsd/gache/v2"
+	"github.com/kpango/gache/v2"
 )
 
 type bench struct {

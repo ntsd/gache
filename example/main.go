@@ -11,8 +11,8 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/kpango/gache/v2"
 	"github.com/kpango/glg"
-	"github.com/ntsd/gache/v2"
 )
 
 var (

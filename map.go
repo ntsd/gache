@@ -396,6 +396,34 @@ func (m *Map[K, V]) RangeIter() iter.Seq2[K, V] {
 	}
 }
 
+func (m *Map[K, V]) RangeIterValue() iter.Seq[V] {
+	return func(yield func(V) bool) {
+		read := m.loadReadOnly()
+		if read.amended {
+			m.mu.Lock()
+			read = m.loadReadOnly()
+			if read.amended {
+				read = readOnly[K, V]{m: m.dirty}
+				copyRead := read
+				m.read.Store(&copyRead)
+				m.dirty = nil
+				m.misses = 0
+			}
+			m.mu.Unlock()
+		}
+
+		for _, e := range read.m {
+			v, ok := e.load()
+			if !ok {
+				continue
+			}
+			if !yield(v) {
+				break
+			}
+		}
+	}
+}
+
 func (m *Map[K, V]) missLocked() {
 	m.misses++
 	if m.misses < len(m.dirty) {

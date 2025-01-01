@@ -38,7 +38,7 @@ import (
 	"testing"
 	"testing/quick"
 
-	gache "github.com/ntsd/gache/v2"
+	gache "github.com/kpango/gache/v2"
 )
 
 type mapOp string

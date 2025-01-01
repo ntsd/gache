@@ -1,4 +1,4 @@
-module github.com/ntsd/gache/v2
+module github.com/kpango/gache/v2
 
 go 1.23.3
 
