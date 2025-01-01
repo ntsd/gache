@@ -4,11 +4,11 @@
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![release](https://img.shields.io/github/release/kpango/gache.svg)](https://github.com/kpango/gache/releases/latest)
+[![release](https://img.shields.io/github/release/kpango/gache.svg)](https://github.com/ntsd/gache/releases/latest)
 [![CircleCI](https://circleci.com/gh/kpango/gache.svg?style=shield)](https://circleci.com/gh/kpango/gache)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac73fd76d01140a38c5650b9278bc971)](https://www.codacy.com/app/i.can.feel.gravity/gache?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kpango/gache&amp;utm_campaign=Badge_Grade)
-[![Go Report Card](https://goreportcard.com/badge/github.com/kpango/gache)](https://goreportcard.com/report/github.com/kpango/gache)
-[![Go Reference](https://pkg.go.dev/badge/github.com/kpango/gache/v2.svg)](https://pkg.go.dev/github.com/kpango/gache/v2)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ntsd/gache)](https://goreportcard.com/report/github.com/ntsd/gache)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ntsd/gache/v2.svg)](https://pkg.go.dev/github.com/ntsd/gache/v2)
 [![Join the chat at https://gitter.im/kpango/gache](https://badges.gitter.im/kpango/gache.svg)](https://gitter.im/kpango/gache?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkpango%2Fgache.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkpango%2Fgache?ref=badge_shield)
 
@@ -19,7 +19,7 @@ Go 1.18~
 
 ## Installation
 ```shell
-go get github.com/kpango/gache/v2
+go get github.com/ntsd/gache/v2
 ```
 
 ## Example
@@ -153,7 +153,7 @@ ok  	github.com/kpango/go-cache-lib-benchmarks	134.203s
 ```
 
 ## Contribution
-1. Fork it ( https://github.com/kpango/gache/fork )
+1. Fork it ( https://github.com/ntsd/gache/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)

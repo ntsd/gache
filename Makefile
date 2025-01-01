@@ -23,7 +23,7 @@ bench: clean init
 	go test -count=1 -timeout=30m -run=NONE -bench . -benchmem
 
 init:
-	GO111MODULE=on go mod init github.com/kpango/gache/v2
+	GO111MODULE=on go mod init github.com/ntsd/gache/v2
 	GO111MODULE=on go mod tidy
 
 profile: clean init
